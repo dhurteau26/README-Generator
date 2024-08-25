@@ -1,9 +1,10 @@
 // TODO: Include packages needed for this application
 import inquirer from 'inquirer';
 import fs from 'fs';
+import generateMarkdown from './generateMarkdown.js';
 
 // TODO: Create an array of questions for user input
-inquirer.prompt([
+const questions = [
     {   name: 'name',
         type: 'input',
         message: 'What is the name of your project?'
@@ -32,36 +33,15 @@ inquirer.prompt([
     {
         name: 'license',
         type: 'input',
-        message: 'Iclude a lisence in the last section of the README.'
+        message: 'Iclude a lisence in the last section of the README.',
+        choices: ["MIT", "APACHE2.0", "Boost1.0", "MPL2.0", "BSD2", "BSD3", "none"],
+        
     }
 
-]).then((answers) => {
-    const userTemplate = fillTemplate(answers);
-    writeFile(userTemplate);
-});
-
-function fillTemplate(answers) {
-    return 
-`# <Project Title>
-${answers.name}
-
-## Description
-${answers.description}
+];
 
 
-## Installation
-${answers.install}
 
-
-## Usage
-${answers.usage}
-
-## Credits
-${answers.credits}
-
-## License
-${answers.license}`
-}
 
 // TODO: Create a function to write README file
 function writeFile(readMe) {
@@ -74,8 +54,24 @@ function writeFile(readMe) {
     });
 }
 
+function writeToFile(readME) {
+    return fs.writeFileSync('README.md', readME, (err)=> {
+        if (err) {
+            console.error("Error writing file: ", err);
+        }else {
+            console.log("README.md created!");
+        }
+    });
+}
+
 // TODO: Create a function to initialize app
-function init() {}
+function init() { 
+    inquirer.prompt(questions).then((responses) => {
+    console.log("creating a Profession README.md File..");
+    writeToFile("./README.md", generateMarkdown({...responses}));
+
+});
+}
 
 // Function call to initialize app
 init();
