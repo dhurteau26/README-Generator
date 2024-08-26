@@ -1,86 +1,86 @@
 // TODO: Create a function that returns a license badge based on which license is passed in
 // If there is no license, return an empty string
-function renderLicenseBadge(license) {
-  if (license === 'MIT') {
-      return '[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)';
-  } else if (license === 'Apache 2.0') {
-      return '[![License](https://img.shields.io/badge/License-Apache%202.0-blue.svg)](https://opensource.org/licenses/Apache-2.0)';
-  } else if (license === 'GPL 3.0') {
-      return '[![License: GPL v3](https://img.shields.io/badge/License-GPLv3-blue.svg)](https://www.gnu.org/licenses/gpl-3.0)';
-  } else {
-    return '';
-  }
-  
-}
+function renderLicenseBadge(license) { 
+        let badge = '';
+        if(license === 'MIT') {
+            badge = '![GitHub license](https://img.shields.io/github/license/Naereen/StrapDown.js.svg)'
+        } else if (license === 'Apache 2.0') {
+            badge = '![License](https://img.shields.io/badge/License-Apache%202.0-blue.svg)'
+        } else if (license === 'GPL v3.0') {
+            badge = '![License: GPL v3](https://img.shields.io/badge/License-GPLv3-blue.svg)'
+        } else {
+          badge = ""
+        }
+        return badge;
+      }
+    
+
 
 // TODO: Create a function that returns the license link
 // If there is no license, return an empty string
 function renderLicenseLink(license) {
-  if (license === 'MIT') {
-    return '[MIT License](https://opensource.org/licenses/MIT)';
-} else if (license === 'Apache 2.0') {
-    return '[Apache License 2.0](https://opensource.org/licenses/Apache-2.0)';
-} else if (license === 'GPL 3.0') {
-    return '[GPL 3.0 License](https://www.gnu.org/licenses/gpl-3.0)';
-} else {
-    return '';
-}
+    let licenseLink = '';
+    if(license === 'MIT') {
+      licenseLink = 'https://choosealicense.com/licenses/mit/'
+    } else if (license === 'Apache 2.0') {
+      licenseLink = 'http://www.apache.org/licenses/LICENSE-2.0'
+    } else if (license === 'GPL v3.0') {
+      licenseLink = 'https://www.gnu.org/licenses'
+    } else {
+      licenseLink = ""
+    }
+    return licenseLink;
 }
 
 // TODO: Create a function that returns the license section of README
 // If there is no license, return an empty string
 function renderLicenseSection(license) {
-  let licenseBadge = '';
-    let licenseLink = '';
-
-    if (license === 'MIT') {
-        licenseBadge = '[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)';
-        licenseLink = '[MIT License](https://opensource.org/licenses/MIT)';
-    } else if (license === 'Apache 2.0') {
-        licenseBadge = '[![License](https://img.shields.io/badge/License-Apache%202.0-blue.svg)](https://opensource.org/licenses/Apache-2.0)';
-        licenseLink = '[Apache License 2.0](https://opensource.org/licenses/Apache-2.0)';
-    } else if (license === 'GPL 3.0') {
-        licenseBadge = '[![License: GPL v3](https://img.shields.io/badge/License-GPLv3-blue.svg)](https://www.gnu.org/licenses/gpl-3.0)';
-        licenseLink = '[GPL 3.0 License](https://www.gnu.org/licenses/gpl-3.0)';
-    }
-
-    if (licenseBadge && licenseLink) {
-        return `
-## License
-
-${licenseBadge}
-
-This project is licensed under the ${licenseLink} license.
-`;
+    let licenseSection = ''
+    if(license === 'None') {
+      licenseSection = ''
     } else {
-        return '';
+      licenseSection =
+      `License: ${license} `
     }
+    return licenseSection;
 }
 
 
 // TODO: Create a function to generate markdown for README
-function generateMarkdown(data) {
+function generateMarkdown(answer) {
   return 
-`# <Project Title>
-${answers.name}
+  `# ${answer.title}
 
-## Description
-${answers.description}
+  ## ${renderLicenseSection(answer.license)} ${renderLicenseBadge(answer.license)}
+  ### ${renderLicenseLink(answer.license)}
 
+  ## Table of Contents:
+  ###  * [Installation](#installation)
+  ###  * [Usage](#usage)
+  ###  * [License](#license)
+  ###  * [Contributors](#contributors)
+  ###  * [Tests](#tests)
+  ###  * [Questions](#questions)
 
-## Installation
-${answers.install}
+  ## Installation:
+  ### You must install the following for this app to function:
+  ### ${answer.installation}
 
+  ## Usage:
+  ### ${answer.usage}
 
-## Usage
-${answers.usage}
+  ## Contributors:
+  ### ${answer.contributions}
 
-## Credits
-${answers.credits}
+  ## Tests:
+  ### Run the following commands in your terminal to test this app:
+  ### ${answer.tests}
 
-## License
-${answers.license}
-
+  ## Questions:
+  ### If you have any questions, you may contact me at either
+  ### Github: https://github.com/${answer.askMe}
+  ### or
+  ### Email: ${answer.email}
 `;
 }
 
