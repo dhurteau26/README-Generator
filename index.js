@@ -68,19 +68,11 @@ const questions = [
 
 
 
-const writeToFile = fileContent => {
-    return new Promise((resolve, reject) => {
-        fs.writeFile('./generatedREADME.md', fileContent, err => {
-            if (err) {
-                reject(err);
-                return;
-            }
-            resolve({
-                ok: true
-            });
-        });
-    });
-};
+function writeFile(fileContent) {
+    fs.appendFile('./generatedREADME.md', `${fileContent}\n`, (err) => 
+       
+        err ? console.error(err) : console.log('README initializing...')
+)};
 
 // function to initialize app
 function init() {
@@ -88,7 +80,7 @@ function init() {
         .then(function(answer) {
             console.log(answer);
         var fileContent = generateMarkdown(answer);
-        writeToFile(fileContent)
+        writeFile(fileContent)
         });
 }
 
