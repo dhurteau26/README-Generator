@@ -53,6 +53,9 @@ function generateMarkdown(answer) {
   ## ${renderLicenseSection(answer.license)} ${renderLicenseBadge(answer.license)}
   ### ${renderLicenseLink(answer.license)}
 
+  ## Description
+  ### ${answer.description}
+  
   ## Table of Contents:
   ###  * [Installation](#installation)
   ###  * [Usage](#usage)
